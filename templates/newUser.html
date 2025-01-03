@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<!-- Form action needs to match the app route -->
+<h1>Add New User</h1>
+<form action="/users/add" method="POST">
+    <div class="mb-3">
+        <label for="name_first" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="name_first" name="name_first" placeholder="Enter First Name">
+    </div>
+   
+    <div class="mb-3">
+        <label for="name_last" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="name_last" name="name_last" placeholder="Enter Last Name">
+    </div>
+    
+    <div class="mb-3">
+        <label for="user_image" class="form-label">User Image </label>
+        <input type="text" class="form-control" id="user_image" name="user_image" placeholder="Enter Image URL">
+    </div>
+    
+    <button id="add_btn" class="btn btn-success">Add</button>
+</form>
+{% endblock %}

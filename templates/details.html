@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="details_container">
+    <img src="{{user.user_image}}" id="user_img" alt="Missing User Image">
+    
+    <section>
+        <h1 id="user_full_name">{{user.name_first}} {{user.name_last}}</h1>
+        
+        <form action="/users/{{user.id}}/edit" method="GET" id="edit_btn">
+            <button type="submit" class="btn btn-primary">edit</button>
+        </form>
+        
+        <form action="/users/{{user.id}}/delete" method="POST" id="delete_btn">
+            <button type="submit" class="btn btn-danger">delete</button>
+        </form>
+    </section>
+</div>
+
+{% endblock %}
