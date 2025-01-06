@@ -24,14 +24,19 @@ body{
 /* Style for details.html */
 .details_container{
    display: flex;
-   flex-wrap: wrap;
+   flex-wrap: nowrap;
    border: 1px solid salmon;
-   width: 30rem;
+   width: 45rem;
    margin: 0 auto;
 }
 
 #user_img{
-    width: 6rem;
+    width: 50%;
+    flex: 1;
+}
+
+#user_detail_text{
+    flex: 2;
 }
 
 #user_full_name{
@@ -44,4 +49,18 @@ body{
 
 #delete_btn{
     display: inline;
+}
+
+.user_post_list{
+    display: block;
+}
+
+/* Style for detailsPost.html */
+#post_btns{
+    display: flex;
+    justify-content: flex-start;
+}
+
+#post_btns form{
+    padding-right: 0.5rem;
 }

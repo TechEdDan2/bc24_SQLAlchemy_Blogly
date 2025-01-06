@@ -95,6 +95,7 @@ Blogly is a simple Flask application that allows users to create, view, edit, an
 - [JinjaDocs] (https://jinja.palletsprojects.com/en/stable/templates/) - I used this to help with creating templates for my pages. 
 - [Bootstrap] (https://getbootstrap.com/docs/5.3/getting-started/introduction/) - I used these docs for some of the styling
 - [FlaskSQLAlchemy] (https://flask-sqlalchemy.readthedocs.io/en/stable/) - Help with using Flask-SQLAlchemy
+- [W3schools] (https://www.w3schools.com/python/python_datetime.asp) - Python Datetime article
 
 ## Author
 - Github - [DNel2](https://github.com/TechEdDan2)
@@ -102,4 +103,4 @@ Blogly is a simple Flask application that allows users to create, view, edit, an
 - Twitter - [@TechEdDan](https://twitter.com/TechEdDan)
 
 ## Acknowledgments
-The YouTubers and other educational resources I have been learning from include: Coder Coder (Jessica Chan), BringYourOwnLaptop (Daniel Walter Scott), Udemy and Bootcamp (Colt Steele)  
+The YouTubers and other educational resources I have been learning from include: Coder Coder (Jessica Chan), BringYourOwnLaptop (Daniel Walter Scott), Udemy courses, and Bootcamp (Colt Steele)  

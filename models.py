@@ -1,6 +1,7 @@
 """Models for Blogly."""
 
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 # Connect the app to the db
 db = SQLAlchemy()
@@ -15,7 +16,6 @@ DEFAULT_USER_IMG = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile
 # ----------- #
 #   Models    #
 # ----------- #
-
 class User(db.Model):
     """User Schema Table"""
 
@@ -35,6 +35,8 @@ class User(db.Model):
     user_image = db.Column(db.Text,
                         nullable = False,
                         default = DEFAULT_USER_IMG)
+
+    posts = db.relationship("Post", backref="usr", cascade="all, delete-orphan")
 
     # Custom printout which overrides the original 
     def __repr__(self):
@@ -57,6 +59,43 @@ class User(db.Model):
     
 
     # Instance Methods
+    @property
     def full_name(self):
         """ Returns the user's full name """
         return f"{self.name_first} {self.name_last}"
+    
+class Post(db.Model):
+    """ Blog Post Schema"""
+
+    __tablename__ = "posts"
+
+     # Attributes
+    id = db.Column(db.Integer, 
+                   primary_key = True,
+                   autoincrement = True)
+    
+    title = db.Column(db.Text,
+                     nullable = False)
+    
+    content = db.Column(db.Text,
+                     nullable = False)
+    
+    created_at = db.Column(db.DateTime,
+                           nullable = False,
+                           default=datetime.datetime.now) 
+    
+    user_id = db.Column(db.Integer, 
+                        db.ForeignKey('users.id'), nullable=False)
+
+    @property
+    def format_date(self):
+        """
+        Returns a formatted date 
+        
+        :return: A string representing the creation timestamp in the format 
+         "Abbreviation of the Weekday and Month Day Year, Hour:Minute AM/PM" 
+         (e.g., "Mon Jul 10 2024, 10:30 AM").
+
+        """
+
+        return self.created_at.strftime("%a %b %-d  %Y, %-I:%M %p")

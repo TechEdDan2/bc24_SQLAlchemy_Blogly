@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="details_container">
+    <div id="post_content">
+        <section id="post_box">
+            <h1 id="post_title">
+                {{post.title}}
+            </h1>
+
+            <p>{{post.content}}</p>
+
+            <p>{{post.usr.full_name}} on {{post.format_date}}</p>
+
+        
+            <div id="post_btns">
+                <!-- Back Button -->
+                <form action="/users/{{post.user_id}}">
+                    <button class="btn btn-info">Back</button>
+                </form>
+
+                <!-- Edit Button -->
+                <form action="/posts/{{post.id}}/edit" method="GET" id="edit_btn">
+                    <button type="submit" class="btn btn-primary">edit</button>
+                </form>
+                
+                <!-- Delete Button -->
+                <form action="/posts/{{post.id}}/delete" method="POST" id="delete_btn">
+                    <button type="submit" class="btn btn-danger">delete</button>
+                </form>
+
+            </div>
+
+        </section>
+    </div>
+
+</div>
+
+{% endblock %}

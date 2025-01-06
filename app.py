@@ -1,7 +1,7 @@
 """Blogly application."""
 
-from flask import Flask, request, render_template, redirect, session
-from models import db, connect_db, User
+from flask import Flask, request, render_template, redirect, session, flash
+from models import db, connect_db, User, Post
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -20,9 +20,9 @@ with app.app_context():
     connect_db(app)
     db.create_all()
 
-# ------------ #
-#   Routes     #
-# ------------ #
+# --------------------- #
+#   Routes for Users    #
+# --------------------- #
 
 # GET REQUESTS
 @app.route('/')
@@ -63,7 +63,7 @@ def create_user():
 
 
 @app.route('/users/add')
-def show_add_user_from():
+def show_add_user_form():
     """ Show the Add User Form """
     return render_template('newUser.html')
 
@@ -106,3 +106,75 @@ def delete_user(user_id):
     db.session.commit()
 
     return redirect("/users")
+
+# --------------------- #
+#   Routes for Posts    #
+# --------------------- #
+
+@app.route('/users/<int:user_id>/posts/new')
+def get_post_form(user_id):
+    """  Show form to add a post for that user. """
+    user = User.query.get_or_404(user_id)
+    return render_template('addPost.html', user=user)
+
+@app.route('/users/<int:user_id>/posts/new', methods=["POST"])
+def create_post(user_id):
+    """ Handle add form; add post and redirect to the user detail page. """
+    user = User.query.get_or_404(user_id)
+    new_post = Post(title = request.form['title'],
+                    content = request.form['content'],
+                    user_id = user.id)
+    
+    # Stage the Data
+    db.session.add(new_post)
+
+    # Commit to the DB
+    db.session.commit()
+
+    return redirect(f"/users/{user_id}")
+
+@app.route('/posts/<int:post_id>')
+def get_single_post(post_id):
+    """ Show a post. Show buttons to edit and delete the post. """
+
+    post = Post.query.get_or_404(post_id)
+    return render_template('detailsPost.html', post=post)
+
+@app.route('/posts/<int:post_id>/edit')
+def get_edit_post(post_id):
+    """ Show form to edit a post, and to cancel (back to user page). """
+
+    post = Post.query.get_or_404(post_id)
+    return render_template('editPost.html', post=post)
+
+@app.route('/posts/<int:post_id>/edit', methods=["POST"])
+def submit_edit(post_id):
+    """ Handle editing of a post. Update popup. Redirect back to the post view. """ 
+
+    post = Post.query.get_or_404(post_id)
+    post.title = request.form['title']
+    post.content = request.form['content']
+
+    db.session.add(post)
+    db.session.commit()
+
+    flash(f"Post named '{post.title}' updated")  
+
+    return redirect(f"/posts/{post_id}")  
+
+@app.route('/posts/<int:post_id>/delete', methods=["POST"])
+def delete_post(post_id):
+    """Delete a single post based on id trigger popup notification """
+
+    post = Post.query.get_or_404(post_id)
+
+    db.session.delete(post)
+    db.session.commit()
+
+    flash(f"Post named '{post.title}' deleted")  
+
+    return redirect(f"/users/{post.user_id}")
+
+
+
+
