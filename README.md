@@ -1,6 +1,6 @@
-# Blogly: A Flask User Blogging Application
+# Blogly: A Flask User Blogging Application V3
 
-Blogly is a simple Flask application that allows users to create, view, edit, and delete user accounts 
+Blogly is a simple Flask application that allows users to create, view, edit, and delete user accounts, posts, and tags 
 
 ## Table of Contents
 - [Overview](#overview)
@@ -19,11 +19,12 @@ Blogly is a simple Flask application that allows users to create, view, edit, an
 ### Features:
 
 - User accounts with profile information (name and image)
-- List of all users
+- List of all users, posts, and tags
 - User detail page
-- Create new user
+- Create new user, post, tag
 - Edit user information
-- Delete user
+- Edit post informaiton
+- Delete user, post, tag
 
 ## Getting Started:
 
@@ -87,7 +88,7 @@ Blogly is a simple Flask application that allows users to create, view, edit, an
 - SQLAlchemy
 
 ### Continued development
-- This is a basic user management application and doesn't include features like user authentication, password management, or blog post creation in the first version of the app.
+- This is a basic user management application and doesn't include features like user authentication, password management; however, this version allows for blog post creation and adding tags.
 - In the next update I hope to add more features and functionalities.
 
 ### Useful resources
@@ -96,6 +97,22 @@ Blogly is a simple Flask application that allows users to create, view, edit, an
 - [Bootstrap] (https://getbootstrap.com/docs/5.3/getting-started/introduction/) - I used these docs for some of the styling
 - [FlaskSQLAlchemy] (https://flask-sqlalchemy.readthedocs.io/en/stable/) - Help with using Flask-SQLAlchemy
 - [W3schools] (https://www.w3schools.com/python/python_datetime.asp) - Python Datetime article
+
+## Project Architecture
+
+- **app.py**: The main application file that initializes the Flask app and sets up routes.
+- **models.py**: Contains the SQLAlchemy models for the application.
+- **templates/**: Directory containing HTML templates for the application.
+- **static/**: Directory containing static files (CSS, JavaScript, images).
+
+## API Endpoints
+
+- `GET /users`: Retrieve a list of all users.
+- `GET /users/<id>`: Retrieve details of a specific user.
+- `POST /users`: Create a new user.
+- `DELETE /users/<id>`: Delete a user.
+
+
 
 ## Author
 - Github - [DNel2](https://github.com/TechEdDan2)
