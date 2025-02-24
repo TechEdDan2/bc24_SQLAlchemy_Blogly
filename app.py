@@ -146,7 +146,8 @@ def get_single_post(post_id):
     """ Show a post. Show buttons to edit and delete the post. """
 
     post = Post.query.get_or_404(post_id)
-    return render_template('detailsPost.html', post=post)
+    post_tags = post.tags
+    return render_template('detailsPost.html', post=post, post_tags=post_tags)
 
 @app.route('/posts/<int:post_id>/edit')
 def get_edit_post(post_id):
@@ -155,6 +156,28 @@ def get_edit_post(post_id):
     post = Post.query.get_or_404(post_id)
     tags = Tag.query.all()
     return render_template('editPost.html', post=post, tags=tags)
+
+@app.route('/posts/<int:post_id>/edit', methods=["POST"])
+def edit_post(post_id):
+    """ Handle editing of a post. Update form. """
+
+    post = Post.query.get_or_404(post_id)
+    post.title = request.form['title']
+    post.content = request.form['content']
+    tag_ids = request.form.getlist('tags')
+    post.tags = [Tag.query.get(tag_id) for tag_id in tag_ids]
+
+    db.session.add(post)
+    db.session.commit()
+
+    return redirect(f"/posts/{post_id}")
+
+@app.route('/posts/all')
+def list_all_posts():
+    """ Show all posts """
+
+    posts = Post.query.all()
+    return render_template('listAllPosts.html', posts=posts)
 
 @app.route('/posts/<int:post_id>/edit', methods=["POST"])
 def submit_edit(post_id):

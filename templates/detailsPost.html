@@ -12,7 +12,11 @@
 
             <p>{{post.usr.full_name}} on {{post.format_date}}</p>
 
-        
+            <p>Tags: 
+                {% for tag in post_tags %}
+                    <a href="/tags/{{tag.id}}" class="btn btn-outline-primary btn-sm">{{tag.name}}</a>
+                {% endfor %}
+
             <div id="post_btns">
                 <!-- Back Button -->
                 <form action="/users/{{post.user_id}}">

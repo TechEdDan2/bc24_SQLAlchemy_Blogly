@@ -14,8 +14,8 @@ Tag.query.delete()
 PostTag.query.delete()
 
 # Add some starting User Data
-test_user = User(name_first="Test", name_last="User")
-test_user2 = User(name_first="Python", name_last="Blogger")
+test_user = User(name_first="Test", name_last="User", user_image="https://freerangestock.com/sample/167255/close-up-portrait-of-a-fluffy-brown-dog.jpg")
+test_user2 = User(name_first="Python", name_last="Blogger", user_image="https://images.unsplash.com/photo-1669475616380-ecb159b790d4?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2ZpbGUlMjBwaWN8ZW58MHx8MHx8fDA%3D")
 test_user3 = User(name_first="Flask", name_last="Blogger")
 
 # Add new objects to the session
